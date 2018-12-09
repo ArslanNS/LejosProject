@@ -1,45 +1,33 @@
-import lejos.hardware.sensor.EV3ColorSensor;
-import lejos.hardware.sensor.EV3UltrasonicSensor;
+import lejos.hardware.lcd.LCD;
 import lejos.robotics.Color;
-import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Behavior;
 
 public class Red implements Behavior {
 	
 	private Central central;
 	
-	private EV3ColorSensor cs;
-	
-	private EV3UltrasonicSensor us;
-	
-	private MovePilot mp;
-	
-	public Red(Central central,  MovePilot mp) {
+	public Red(Central central) {
 		this.central = central;
-		this.mp = mp;
-		cs = central.cs;
-		us = central.us;
 	}
 
 	@Override
 	public boolean takeControl() {
-		if(cs.getColorID() == Color.RED) {
-			return true;
-		}
-		return false;
+		return central.getColour() == Color.RED;
 	}
 
 	@Override
 	public void action() {
-		central.scan.displayColours(); //Display on LCD
-		mp.travel(central.redDist);
+		central.conveyor.stop();
+		LCD.clear();
+		LCD.drawString("I'm currently sorting: ", 0, 2);
+		LCD.drawString("Red", 0, 3);
+		central.goTo(central.redDist);
 		central.pushItem();
-		mp.setLinearSpeed(50);
-		mp.backward();
-		while(central.getDistance() >= 0.02) {
-			mp.backward();
+		central.goBack();
+		while(central.getDistance() >= central.baseDistance) { //Keeps distance accurate using ultrasonic sensor
 		}
-		mp.stop();
+		central.stop();
+		central.moveUntil();
 	}
 
 	@Override

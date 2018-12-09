@@ -1,14 +1,3 @@
-import lejos.hardware.lcd.LCD;
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.motor.EV3MediumRegulatedMotor;
-import lejos.hardware.motor.NXTRegulatedMotor;
-import lejos.hardware.port.MotorPort;
-import lejos.hardware.port.SensorPort;
-import lejos.hardware.sensor.EV3ColorSensor;
-import lejos.robotics.chassis.Chassis;
-import lejos.robotics.chassis.Wheel;
-import lejos.robotics.chassis.WheeledChassis;
-import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
@@ -16,22 +5,22 @@ public class MainKVN3 {
 
 	public static void main(String[] args) {
 		
-		EV3LargeRegulatedMotor mR = new EV3LargeRegulatedMotor(MotorPort.A);
-		
-		EV3LargeRegulatedMotor mL = new EV3LargeRegulatedMotor(MotorPort.D);
-		
-		Wheel wL = WheeledChassis.modelWheel(mL, 56).offset(-(125 / 2));
-		Wheel wR = WheeledChassis.modelWheel(mR, 56).offset((125 / 2));
-		Chassis chassis = new WheeledChassis(new Wheel[] {wL, wR}, WheeledChassis.TYPE_DIFFERENTIAL);
-		MovePilot mp = new MovePilot(chassis);
-		
-		chassis.setLinearSpeed(50);
-		chassis.setAngularSpeed(50);
-		
-		CurrentSample current = new CurrentSample();
-		
 		Central central = new Central();
 		
+		//Stop stop = new Stop(central);
+		Red red = new Red(central);
+		Blue blue = new Blue(central);
+		Yellow yellow = new Yellow(central);
+		Green green = new Green(central);
+		Pink pink = new Pink(central);
+		Brown brown = new Brown(central);
+		
+		Behavior[] behave = {red, blue, yellow, green, pink, brown};
+		Arbitrator sort = new Arbitrator(behave);
+		central.setSort(sort);
+		central.moveUntil();
+		//central.scan.displayColours();
+		sort.go();
 	}
 }
 

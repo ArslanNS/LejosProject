@@ -1,21 +1,38 @@
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
+import lejos.robotics.chassis.Chassis;
+import lejos.robotics.chassis.Wheel;
+import lejos.robotics.chassis.WheeledChassis;
+import lejos.robotics.navigation.MovePilot;
+import lejos.robotics.subsumption.Arbitrator;
+import lejos.utility.Delay;
 
 public class Central {
 	
-	private float[] distanceArr;
+	final private double regSpeed = 50;
 	
-	private float distance;
+	private float[] distanceArr = new float[1];
 	
-	public EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S1);
+	private float distance = 0;
 	
-	public EV3MediumRegulatedMotor conveyor = new EV3MediumRegulatedMotor(MotorPort.B);
+	private Arbitrator sort;
 	
-	public EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S2);
+	private MovePilot mp;
+	
+	private EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S1);
+	
+	private EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S3);
+	
+	private SampleProvider distanceSample = us.getDistanceMode();
+	
+	public EV3MediumRegulatedMotor conveyor = new EV3MediumRegulatedMotor(MotorPort.C);
+	
+	public double baseDistance = getDistance();
 	
 	public Scanning scan = new Scanning(this);
 	
@@ -23,32 +40,46 @@ public class Central {
 	
 	public int currentColour;
 	
-	public double redDist;
+	public double redDist = 0;
+
+	public double pinkDist = 155;
 	
-	public double blueDist;
+	public double yellowDist = 305;
+
+	public double greenDist = 305+140;
 	
-	public double yellowDist;
+	public double blueDist = 305+285;
 	
-	public double blackDist;
+	public double brownDist = 305+285+135;
 	
-	public double greenDist;
+	private float conveyorSpeed = 30;
 	
-	public double pinkDist;
-	
-	public double brownDist;
-	
-	private float conveyorSpeed = 50;
+	public Central() {
+		
+		EV3LargeRegulatedMotor mR = new EV3LargeRegulatedMotor(MotorPort.A);
+		
+		EV3LargeRegulatedMotor mL = new EV3LargeRegulatedMotor(MotorPort.D);
+		
+		Wheel wL = WheeledChassis.modelWheel(mL, 56).offset(-(165 / 2));
+		Wheel wR = WheeledChassis.modelWheel(mR, 56).offset((165 / 2));
+		Chassis chassis = new WheeledChassis(new Wheel[] {wL, wR}, WheeledChassis.TYPE_DIFFERENTIAL);
+		MovePilot mp = new MovePilot(chassis);
+		
+		chassis.setLinearSpeed(50);
+		chassis.setAngularSpeed(50);
+		
+		this.mp = mp;
+	}
 	
 	public void pushItem() {
-		conveyor.setSpeed(conveyorSpeed);
-		while(cs.getColorID() == currentColour) {
-			conveyor.forward();
-		}
+		moveUntil();
+		Delay.msDelay(5600);
 		conveyor.stop();
 	}
 	
 	public void moveUntil() {
-		
+		conveyor.setSpeed(conveyorSpeed);
+		conveyor.forward();
 	}
 	
 	public void updateColour() {
@@ -57,10 +88,39 @@ public class Central {
 	}
 	
 	public float getDistance() {
-		SampleProvider distanceSample = us.getDistanceMode();
 		distanceSample.fetchSample(distanceArr, 0);
 		distance = distanceArr[0];
 		return distance;
 	}
-
+	
+	public void setSort(Arbitrator sort) {
+		this.sort = sort;
+	}
+	
+	public Arbitrator getSort() {
+		return this.sort;
+	}
+	
+	public void setRegSpeed() {
+		mp.setLinearSpeed(regSpeed);
+		mp.setAngularSpeed(regSpeed);
+	}
+	
+	public void goTo(double colour) {
+		setRegSpeed();
+		mp.travel(-colour);
+	}
+	
+	public int getColour() {
+		return cs.getColorID();
+	}
+	
+	public void goBack() {
+		setRegSpeed();
+		mp.forward();
+	}
+	
+	public void stop() {
+		mp.stop();
+	}
 }
