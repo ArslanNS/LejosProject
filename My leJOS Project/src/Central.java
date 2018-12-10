@@ -14,7 +14,7 @@ import lejos.utility.Delay;
 
 public class Central {
 	
-	final private double regSpeed = 50;
+	final private double regSpeed = 100;
 	
 	private float[] distanceArr = new float[1];
 	
@@ -24,9 +24,9 @@ public class Central {
 	
 	private MovePilot mp;
 	
-	private EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S1);
+	private EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S2);
 	
-	private EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S3);
+	private EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
 	
 	private SampleProvider distanceSample = us.getDistanceMode();
 	
@@ -40,19 +40,19 @@ public class Central {
 	
 	public int currentColour;
 	
-	public double redDist = 0;
+	public double redDist = 0; //1
 
-	public double pinkDist = 155;
+	public double pinkDist = 306; //4
 	
-	public double yellowDist = 305;
+	public double yellowDist = 306;
 
-	public double greenDist = 305+140;
+	public double greenDist = 102; //2
 	
-	public double blueDist = 305+285;
+	public double blueDist = 204; //3
 	
-	public double brownDist = 305+285+135;
+	public double brownDist = 306;
 	
-	private float conveyorSpeed = 30;
+	private float conveyorSpeed = 250;
 	
 	public Central() {
 		
@@ -73,7 +73,7 @@ public class Central {
 	
 	public void pushItem() {
 		moveUntil();
-		Delay.msDelay(5600);
+		Delay.msDelay(1000);
 		conveyor.stop();
 	}
 	

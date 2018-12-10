@@ -28,6 +28,7 @@ public class Red implements Behavior {
 		}
 		central.stop();
 		central.moveUntil();
+		LCD.clear();
 	}
 
 	@Override

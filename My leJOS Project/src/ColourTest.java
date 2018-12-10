@@ -9,5 +9,6 @@ public class ColourTest {
 		System.out.println(Color.GREEN);
 		System.out.println(Color.PINK);
 		System.out.println(Color.BROWN);
+		System.out.println(Color.WHITE);
 	}
 }

@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
@@ -12,10 +14,10 @@ public class MainKVN3 {
 		Blue blue = new Blue(central);
 		Yellow yellow = new Yellow(central);
 		Green green = new Green(central);
-		Pink pink = new Pink(central);
-		Brown brown = new Brown(central);
+		//Pink pink = new Pink(central);
+		//Brown brown = new Brown(central);
 		
-		Behavior[] behave = {red, blue, yellow, green, pink, brown};
+		Behavior[] behave = {red, yellow, blue, green};
 		Arbitrator sort = new Arbitrator(behave);
 		central.setSort(sort);
 		central.moveUntil();
