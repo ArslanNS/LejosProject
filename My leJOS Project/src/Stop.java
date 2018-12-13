@@ -7,6 +7,9 @@ public class Stop extends Thread {
 	
 	public Stop(Central central) {
 		this.sort = central.getSort();
+	}
+	
+	public void run() {
 		Button.ENTER.waitForPressAndRelease();
 		sort.stop();
 	}

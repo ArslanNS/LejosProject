@@ -16,7 +16,7 @@ public class MainKVN3 {
 		
 		Stop s = new Stop(central);
 		
-		s.start();
+		s.start(); //Thread for stopping the arbitrator
 		central.setSort(sort);
 		central.moveUntil();
 		sort.go();
