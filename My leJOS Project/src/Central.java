@@ -38,8 +38,6 @@ public class Central {
 	
 	public boolean running = true;
 	
-	public int currentColour;
-	
 	public double redDist = 0;
 	
 	public double yellowDist = 0;
@@ -54,7 +52,7 @@ public class Central {
 		
 		LCD.clearDisplay();
 		LCD.drawString("Red box", 0, 0);
-		LCD.drawString("Press enter to set this distance", 0, 1);
+		LCD.drawString("Press enter to set this distance", 0, 1); //make sure these fit on the screen
 		Button.ENTER.waitForPressAndRelease();
 		redDist = getDistance();
 		baseDistance = redDist;
