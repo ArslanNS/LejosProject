@@ -54,26 +54,26 @@ public class Central {
 		LCD.drawString("Red box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1); //make sure these fit on the screen
 		Button.ENTER.waitForPressAndRelease();
-		redDist = getDistance();
+		redDist = getDistance()*1000; //Converts from m to mm
 		baseDistance = redDist;
 		
 		LCD.clearDisplay();
 		LCD.drawString("Yellow box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
-		yellowDist = getDistance();
+		yellowDist = getDistance()*1000;
 		
 		LCD.clearDisplay();
 		LCD.drawString("Green box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
-		greenDist = getDistance();
+		greenDist = getDistance()*1000;
 		
 		LCD.clearDisplay();
 		LCD.drawString("Blue box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
-		blueDist = getDistance();
+		blueDist = getDistance()*1000;
 		
 		
 		EV3LargeRegulatedMotor mR = new EV3LargeRegulatedMotor(MotorPort.A);
