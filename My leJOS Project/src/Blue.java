@@ -19,7 +19,7 @@ public class Blue implements Behavior {
 	public void action() {
 		central.conveyor.stop();
 		LCD.clear();
-		LCD.drawString("I'm currently sorting: ", 0, 2);
+		LCD.drawString("Currently sorting: ", 0, 2);
 		LCD.drawString("Blue", 0, 3);
 		central.goTo(central.blueDist);
 		central.pushItem();

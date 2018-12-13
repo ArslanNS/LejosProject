@@ -34,9 +34,7 @@ public class Central {
 	
 	public EV3MediumRegulatedMotor conveyor = new EV3MediumRegulatedMotor(MotorPort.C);
 	
-	public double baseDistance = getDistance();
-	
-	public Scanning scan = new Scanning(this);
+	public double baseDistance = 0;
 	
 	public boolean running = true;
 	
@@ -59,6 +57,7 @@ public class Central {
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
 		redDist = getDistance();
+		baseDistance = redDist;
 		
 		LCD.clearDisplay();
 		LCD.drawString("Yellow box", 0, 0);
@@ -103,11 +102,6 @@ public class Central {
 	public void moveUntil() {
 		conveyor.setSpeed(conveyorSpeed);
 		conveyor.forward();
-	}
-	
-	public void updateColour() {
-		currentColour = cs.getColorID();
-		scan.displayColours();
 	}
 	
 	public float getDistance() {
