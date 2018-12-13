@@ -1,3 +1,5 @@
+import lejos.hardware.Button;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -40,21 +42,42 @@ public class Central {
 	
 	public int currentColour;
 	
-	public double redDist = 0; //1
+	public double redDist = 0;
+	
+	public double yellowDist = 0;
 
-	public double pinkDist = 306; //4
+	public double greenDist = 0;
 	
-	public double yellowDist = 306;
-
-	public double greenDist = 102; //2
-	
-	public double blueDist = 204; //3
-	
-	public double brownDist = 306;
+	public double blueDist = 0;
 	
 	private float conveyorSpeed = 250;
 	
 	public Central() {
+		
+		LCD.clearDisplay();
+		LCD.drawString("Red box", 0, 0);
+		LCD.drawString("Press enter to set this distance", 0, 1);
+		Button.ENTER.waitForPressAndRelease();
+		redDist = getDistance();
+		
+		LCD.clearDisplay();
+		LCD.drawString("Yellow box", 0, 0);
+		LCD.drawString("Press enter to set this distance", 0, 1);
+		Button.ENTER.waitForPressAndRelease();
+		yellowDist = getDistance();
+		
+		LCD.clearDisplay();
+		LCD.drawString("Green box", 0, 0);
+		LCD.drawString("Press enter to set this distance", 0, 1);
+		Button.ENTER.waitForPressAndRelease();
+		greenDist = getDistance();
+		
+		LCD.clearDisplay();
+		LCD.drawString("Blue box", 0, 0);
+		LCD.drawString("Press enter to set this distance", 0, 1);
+		Button.ENTER.waitForPressAndRelease();
+		blueDist = getDistance();
+		
 		
 		EV3LargeRegulatedMotor mR = new EV3LargeRegulatedMotor(MotorPort.A);
 		

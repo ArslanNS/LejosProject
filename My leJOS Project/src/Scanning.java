@@ -43,7 +43,7 @@ public class Scanning {
 			}
 		}
 		LCD.clear();
-		LCD.drawString("I'm currently sorting: ", 0, 2);
+		LCD.drawString("Currently sorting: ", 0, 2);
 		LCD.drawString(str, 0, 3);
 	}
 }
