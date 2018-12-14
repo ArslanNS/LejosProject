@@ -38,23 +38,23 @@ public class Central {
 	
 	public boolean running = true;
 	
-	public double redDist = 0;
+	public double redDist;
 	
-	public double yellowDist = 0;
+	public double yellowDist;
 
-	public double greenDist = 0;
+	public double greenDist;
 	
-	public double blueDist = 0;
+	public double blueDist;
 	
 	private float conveyorSpeed = 250;
 	
 	public Central() {
 		
 		LCD.clearDisplay();
-		LCD.drawString("Red box", 0, 0);
+		LCD.drawString("Red box (1st box)", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1); //make sure these fit on the screen
 		Button.ENTER.waitForPressAndRelease();
-		redDist = 0; //As the robot will begin at the first box
+		redDist = 0; //As the robot will begin at the first box - It does not have to move to start the conveyor
 		baseDistance = getDistance()*1000; //*1000 converts from m to mm
 		
 		LCD.clearDisplay();
