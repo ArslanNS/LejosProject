@@ -16,6 +16,7 @@ public class Stop extends Thread {
 		Button.ENTER.waitForPressAndRelease();
 		sort.stop();
 		central.stop();
+		central.conveyor.stop();
 		central.goBack();
 		while(central.getDistance() > central.baseDistance) {
 		}
