@@ -24,7 +24,7 @@ public class Yellow implements Behavior {
 		central.goTo(central.yellowDist);
 		central.pushItem();
 		central.goBack();
-		while(central.getDistance() >= central.baseDistance) { //Keeps distance accurate using ultrasonic sensor
+		while(central.getDistance() > central.baseDistance) { //Keeps distance accurate using ultrasonic sensor
 		}
 		central.stop();
 		central.moveUntil();

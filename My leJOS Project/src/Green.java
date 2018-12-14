@@ -24,7 +24,7 @@ public class Green implements Behavior {
 		central.goTo(central.greenDist);
 		central.pushItem();
 		central.goBack();
-		while(central.getDistance() >= central.baseDistance) { //Keeps distance accurate using ultrasonic sensor
+		while(central.getDistance() > central.baseDistance) { //Keeps distance accurate using ultrasonic sensor
 		}
 		central.stop();
 		central.moveUntil();
