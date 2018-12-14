@@ -34,7 +34,7 @@ public class Central {
 	
 	public EV3MediumRegulatedMotor conveyor = new EV3MediumRegulatedMotor(MotorPort.C);
 	
-	public double baseDistance = 0;
+	public double baseDistance;
 	
 	public boolean running = true;
 	
