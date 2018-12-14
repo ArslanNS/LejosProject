@@ -54,8 +54,8 @@ public class Central {
 		LCD.drawString("Red box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1); //make sure these fit on the screen
 		Button.ENTER.waitForPressAndRelease();
-		redDist = getDistance()*1000; //Converts from m to mm
-		baseDistance = redDist;
+		redDist = 0; //As the robot will begin at the first box
+		baseDistance = getDistance()*1000; //*1000 converts from m to mm
 		
 		LCD.clearDisplay();
 		LCD.drawString("Yellow box", 0, 0);
