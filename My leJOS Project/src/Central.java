@@ -61,19 +61,19 @@ public class Central {
 		LCD.drawString("Yellow box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
-		yellowDist = getDistance()*1000;
+		yellowDist = getDistance()*1000 - baseDistance;
 		
 		LCD.clearDisplay();
 		LCD.drawString("Green box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
-		greenDist = getDistance()*1000;
+		greenDist = getDistance()*1000 - baseDistance;
 		
 		LCD.clearDisplay();
 		LCD.drawString("Blue box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
-		blueDist = getDistance()*1000;
+		blueDist = getDistance()*1000 - baseDistance;
 		
 		
 		EV3LargeRegulatedMotor mR = new EV3LargeRegulatedMotor(MotorPort.A);
