@@ -61,7 +61,7 @@ public class Central {
 		LCD.drawString("Yellow box", 0, 0);
 		LCD.drawString("Press enter to set this distance", 0, 1);
 		Button.ENTER.waitForPressAndRelease();
-		yellowDist = getDistance()*1000 - baseDistance;
+		yellowDist = getDistance()*1000 - baseDistance; //Current distance - Starting distance
 		
 		LCD.clearDisplay();
 		LCD.drawString("Green box", 0, 0);
